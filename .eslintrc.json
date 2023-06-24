@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "symbol-description": "off",
     "quotes": ["error", "double"],
     "import/no-extraneous-dependencies": [
       "error",
