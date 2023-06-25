@@ -11,6 +11,7 @@
   },
   "rules": {
     "no-param-reassign": "off",
+    "prefer-template": "off",
     "symbol-description": "off",
     "quotes": ["error", "double"],
     "import/no-extraneous-dependencies": [

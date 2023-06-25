@@ -30,53 +30,50 @@ const WEATHERCODE = {
   99: "Heavy Thunderstorm",
 };
 
-// wtf
-function round(obj) {
-  return JSON.parse(JSON.stringify(obj), (key, value) => {
-    if (typeof value === "number" && key !== "currWind") {
-      return Math.round(value);
-    }
-
-    return value;
-  });
-}
-
-export const DEFAULT = {
+export const METRIC = {
   temp: "°C",
   wind: " kph",
 };
 
-export const ALTERNATIVE = {
+export const IMPERIAL = {
   temp: "°F",
   wind: " mph",
 };
 
-export function process(dataObj, unitObj) {
-  const clone = round(structuredClone(dataObj));
+function modify(dataObj, propsToCallbacks) {
+  const clone = structuredClone(dataObj);
 
-  clone.lastUpdateTime = format(
-    parseISO(clone.lastUpdateTime),
-    "EEEE, MMMM d, y 'at' HH:mm",
-  );
-
-  clone.currApparTemp += unitObj.temp;
-  clone.currTemp += unitObj.temp;
-  clone.currDesc = WEATHERCODE[clone.currDesc];
-  clone.currWind += unitObj.wind;
-  clone.currPrecip += "%";
-  clone.currHumidity += "%";
-
-  clone.nextDescs.forEach((desc, index) => {
-    clone.nextDescs[index] = WEATHERCODE[desc];
-  });
-
-  clone.nextTempsMax.forEach((_, index) => {
-    clone.nextTempsMax[index] += unitObj.temp;
-  });
-
-  clone.nextTempsMin.forEach((_, index) => {
-    clone.nextTempsMin[index] += unitObj.temp;
+  Object.entries(clone).forEach(([key, value]) => {
+    clone[key] = propsToCallbacks[key]?.(value) ?? value;
   });
 
   return clone;
+}
+
+export function process(dataObj, unitObj) {
+  const processTime = (time) =>
+    format(parseISO(time), "EEEE, MMMM d, y 'at' HH:mm");
+
+  const processTemp = (temp) => Math.round(temp) + unitObj.temp;
+  const processWind = (wind) => wind + unitObj.wind;
+  const processPercentage = (percentage) => percentage + "%";
+  const processUV = (uv) => uv.toFixed(1);
+  const processWeatherCode = (code) => WEATHERCODE[code];
+
+  const processTempArray = (arr) => arr.map(processTemp);
+  const processWeatherCodeArray = (arr) => arr.map(processWeatherCode);
+
+  return modify(dataObj, {
+    lastUpdateTime: processTime,
+    currApparTemp: processTemp,
+    currTemp: processTemp,
+    currWind: processWind,
+    currPrecip: processPercentage,
+    currHumidity: processPercentage,
+    currUV: processUV,
+    currDesc: processWeatherCode,
+    nextDescs: processWeatherCodeArray,
+    nextTempsMax: processTempArray,
+    nextTempsMin: processTempArray,
+  });
 }
