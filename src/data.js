@@ -66,8 +66,10 @@ async function getWeatherData(latitude, longitude, timezone, imperial) {
 
 export default async function getData(query, imperial) {
   const {
-    results: [{ latitude, longitude, timezone }],
+    results: [{ name: city, country, latitude, longitude, timezone }],
   } = await getLocationData(query);
+
+  console.log(await getLocationData(query));
 
   // [Symbol()] guarantees a non-existent property because
   // data is retrieved from JSON. Hacky, but very cool, so
@@ -96,6 +98,8 @@ export default async function getData(query, imperial) {
   } = await getWeatherData(latitude, longitude, timezone, imperial);
 
   return {
+    city,
+    country,
     lastUpdateTime,
     currDesc,
     currTemp,

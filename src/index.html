@@ -6,14 +6,19 @@
     <title>Weather App</title>
   </head>
   <body>
+    <div class="search">
+      <input class="search__control" type="text" placeholder="Search city">
+      <button class="search__enter"><img src="./icons/search.svg"></button>
+    </div>
     <button class="unit-toggle">°F / mph</button>
 
     <article class="article">
       <header class="header">
-        <h1 class="header__title">Kanata, Canada</h1>
+        <h1 class="header__location">Kanata, Canada</h1>
         <p class="header__time">
-          <span class="header__term">Last updated</span>
+          <span class="header__term">Last updated on</span>
           <span data-time></span>
+          <span class="header__term">(local time)</span>
         </p>
       </header>
 

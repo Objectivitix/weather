@@ -6,9 +6,13 @@ import processData from "./process";
 const METRIC_TEXT = "°C / kph";
 const IMPERIAL_TEXT = "°F / mph";
 
+const searchControl = document.querySelector(".search__control");
+const searchEnter = document.querySelector(".search__enter");
 const unitToggle = document.querySelector(".unit-toggle");
 
+const location = document.querySelector(".header__location");
 const time = document.querySelector("[data-time]");
+
 const desc = document.querySelector(".basic__desc");
 const appar = document.querySelector("[data-appar]");
 const temp = document.querySelector(".basic__temp");
@@ -38,6 +42,8 @@ async function run(query, imperial) {
 }
 
 function displayData({
+  city,
+  country,
   lastUpdateTime,
   currDesc,
   currTemp,
@@ -49,7 +55,9 @@ function displayData({
   nextTempsHigh,
   nextTempsLow,
 }) {
+  location.textContent = `${city}, ${country}`;
   time.textContent = lastUpdateTime;
+
   desc.textContent = currDesc;
   temp.textContent = currTemp;
   appar.textContent = currApparTemp;
@@ -77,6 +85,11 @@ function bind() {
     } else {
       unitToggle.textContent = IMPERIAL_TEXT;
     }
+  });
+
+  searchEnter.addEventListener("click", async () => {
+    prevQuery = searchControl.value;
+    await run(prevQuery, currImperial);
   });
 }
 
