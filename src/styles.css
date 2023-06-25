@@ -1,6 +1,6 @@
 /* FONTS */
 
-@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400&family=Spectral:wght@500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@300;400&family=Spectral:wght@500;700&display=swap");
 
 /* RESET */
 
@@ -120,7 +120,7 @@ body {
   font-size: min(calc(10vw + 4rem), 12rem);
 }
 
-.basic__appar-temp {
+.basic__appar {
   margin-top: -2rem;
 }
 

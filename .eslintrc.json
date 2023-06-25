@@ -10,6 +10,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-param-reassign": "off",
     "symbol-description": "off",
     "quotes": ["error", "double"],
     "import/no-extraneous-dependencies": [

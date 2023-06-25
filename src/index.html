@@ -1,78 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
-</head>
-<body>
-  <article class="article">
-    <header class="header">
-      <h1 class="header__title">Kanata, Canada</h1>
-      <p class="header__time"><span class="header__term">Last updated</span> Friday, June 22, 2023 at 12:24</p>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <article class="article">
+      <header class="header">
+        <h1 class="header__title">Kanata, Canada</h1>
+        <p class="header__time">
+          <span class="header__term">Last updated</span>
+          <span data-time>Friday, June 22, 2023 at 12:24</span>
+        </p>
+      </header>
 
-    <section class="current">
-      <div class="basic">
-        <p class="basic__desc">Clear sky</p>
-        <p class="basic__temp">27°C</p>
-        <p class="basic__appar-temp"><span class="basic__term">Feels like</span> 28°C</p>
-      </div>
-      <dl class="more">
-        <div class="more__row">
-          <dt class="more__term">Humidity</dt>
-          <dd>58%</dd>
+      <section class="current">
+        <div class="basic">
+          <p class="basic__desc">Clear sky</p>
+          <p class="basic__temp">27°C</p>
+          <p class="basic__appar">
+            <span class="basic__term">Feels like</span>
+            <span data-appar>28°C</span>
+          </p>
         </div>
-        <div class="more__row">
-          <dt class="more__term">Precipitation</dt>
-          <dd>0%</dd>
-        </div>
-        <div class="more__row">
-          <dt class="more__term">Wind</dt>
-          <dd>5.5 kph</dd>
-        </div>
-        <div class="more__row">
-          <dt class="more__term">UV Index</dt>
-          <dd>8</dd>
-        </div>
-      </dl>
-    </section>
+        <dl class="more">
+          <div class="more__row">
+            <dt class="more__term">Humidity</dt>
+            <dd data-humidity>58%</dd>
+          </div>
+          <div class="more__row">
+            <dt class="more__term">Precipitation</dt>
+            <dd data-precip>0%</dd>
+          </div>
+          <div class="more__row">
+            <dt class="more__term">Wind</dt>
+            <dd data-wind>5.5 kph</dd>
+          </div>
+          <div class="more__row">
+            <dt class="more__term">UV Index</dt>
+            <dd data-uv>8</dd>
+          </div>
+        </dl>
+      </section>
 
-    <section class="forecast">
-      <div class="forecast__block">
-        <h3 class="forecast__day">Sat</h3>
-        <p>28°C <span class="forecast__low">15°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Sun</h3>
-        <p>29°C <span class="forecast__low">14°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Mon</h3>
-        <p>28°C <span class="forecast__low">16°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Tue</h3>
-        <p>31°C <span class="forecast__low">18°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Wed</h3>
-        <p>29°C <span class="forecast__low">15°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Thu</h3>
-        <p>30°C <span class="forecast__low">13°C</span></p>
-      </div>
-      <div class="forecast__block">
-        <h3 class="forecast__day">Fri</h3>
-        <p>28°C <span class="forecast__low">17°C</span></p>
-      </div>
-    </section>
+      <section class="forecast">
+        <div class="forecast__block">
+          <h3 class="forecast__day">Sat</h3>
+          <p>28°C <span class="forecast__low">15°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Sun</h3>
+          <p>29°C <span class="forecast__low">14°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Mon</h3>
+          <p>28°C <span class="forecast__low">16°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Tue</h3>
+          <p>31°C <span class="forecast__low">18°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Wed</h3>
+          <p>29°C <span class="forecast__low">15°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Thu</h3>
+          <p>30°C <span class="forecast__low">13°C</span></p>
+        </div>
+        <div class="forecast__block">
+          <h3 class="forecast__day">Fri</h3>
+          <p>28°C <span class="forecast__low">17°C</span></p>
+        </div>
+      </section>
 
-    <footer>
-      <p><span class="footer__term">Made by</span> <a class="footer__link" href="https://github.com/Objectivitix/weather" target="_blank">Objectivitix</a></p>
-      <p><span class="footer__term">Weather data from</span> <a class="footer__link" href="https://open-meteo.com/" target="_blank">OpenMeteo</a></p>
-    </footer>
-  </article>
-</body>
+      <footer>
+        <p>
+          <span class="footer__term">Made by</span>
+          <a class="footer__link" href="https://github.com/Objectivitix/weather" target="_blank"
+            >Objectivitix</a
+          >
+        </p>
+        <p>
+          <span class="footer__term">Weather data from</span>
+          <a class="footer__link" href="https://open-meteo.com/" target="_blank">OpenMeteo</a>
+        </p>
+      </footer>
+    </article>
+  </body>
 </html>
