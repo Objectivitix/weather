@@ -30,12 +30,12 @@ const WEATHERCODE = {
   99: "Heavy Thunderstorm",
 };
 
-export const METRIC = {
+const METRIC = {
   temp: "°C",
   wind: " kph",
 };
 
-export const IMPERIAL = {
+const IMPERIAL = {
   temp: "°F",
   wind: " mph",
 };
@@ -50,7 +50,9 @@ function modify(dataObj, propsToCallbacks) {
   return clone;
 }
 
-export function process(dataObj, unitObj) {
+export default function processData(dataObj, imperial) {
+  const unitObj = imperial ? IMPERIAL : METRIC;
+
   const processTime = (time) =>
     format(parseISO(time), "EEEE, MMMM d, y 'at' HH:mm");
 

@@ -10,6 +10,12 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false
+      }
+    ],
     "no-param-reassign": "off",
     "prefer-template": "off",
     "symbol-description": "off",

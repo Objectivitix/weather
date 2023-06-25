@@ -80,12 +80,26 @@ body {
   padding: 15rem 0 7rem;
 }
 
-.header__term,
-.basic__term,
-.more__term,
-.footer__term {
-  color: var(--grey);
-  font-weight: var(--fw-lgt);
+.unit-toggle {
+  position: absolute;
+  right: 5rem;
+  top: 5rem;
+
+  width: 13rem;
+  padding: 1.25rem;
+  background: white;
+
+  border-radius: 1.25rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem hsl(0 0% 0% / 30%);
+
+  text-align: center;
+  font-size: var(--fs-700);
+  transition: 50ms;
+}
+
+.unit-toggle:active {
+  box-shadow: none;
+  transform: translate(0.5rem, 0.5rem);
 }
 
 .article {
@@ -93,6 +107,14 @@ body {
   flex-direction: column;
   gap: 10rem;
   width: min(90vw, 75rem);
+}
+
+.header__term,
+.basic__term,
+.more__term,
+.footer__term {
+  color: var(--grey);
+  font-weight: var(--fw-lgt);
 }
 
 .header {
