@@ -3,6 +3,8 @@ import { addDays, format } from "date-fns";
 import getData, { LocationError } from "./data";
 import processData from "./process";
 
+const ENTER = "Enter";
+
 const METRIC_TEXT = "°C / kph";
 const IMPERIAL_TEXT = "°F / mph";
 
@@ -89,22 +91,34 @@ function bind() {
     }
   });
 
-  searchEnter.addEventListener("click", async () => {
-    const tentative = searchControl.value;
-
-    try {
-      await run(tentative, currImperial);
-      currQuery = tentative;
-      searchControl.value = "";
-    } catch (err) {
-      if (err instanceof LocationError) {
-        handleLocationError();
-        return;
-      }
-
-      throw err;
+  searchEnter.addEventListener("click", onEnter);
+  document.addEventListener("keyup", (evt) => {
+    if (evt.key === ENTER) {
+      onEnter();
     }
   });
+}
+
+async function onEnter() {
+  const tentative = searchControl.value;
+
+  if (!(tentative && /\S/.test(tentative))) {
+    displayError("Location input cannot be empty.")
+    return;
+  }
+
+  try {
+    await run(tentative, currImperial);
+    currQuery = tentative;
+    searchControl.value = "";
+  } catch (err) {
+    if (err instanceof LocationError) {
+      displayError("Cannot find this location.");
+      return;
+    }
+
+    throw err;
+  }
 }
 
 function displayWeek() {
@@ -119,8 +133,8 @@ function displayWeek() {
   });
 }
 
-function handleLocationError() {
-  searchError.textContent = "Cannot find this location.";
+function displayError(message) {
+  searchError.textContent = message;
 
   searchControl.addEventListener(
     "input",
