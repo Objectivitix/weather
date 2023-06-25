@@ -54,26 +54,26 @@ export function process(dataObj, unitObj) {
   const processTime = (time) =>
     format(parseISO(time), "EEEE, MMMM d, y 'at' HH:mm");
 
-  const processTemp = (temp) => Math.round(temp) + unitObj.temp;
-  const processWind = (wind) => wind + unitObj.wind;
-  const processPercentage = (percentage) => percentage + "%";
-  const processUV = (uv) => uv.toFixed(1);
   const processWeatherCode = (code) => WEATHERCODE[code];
+  const processTemp = (temp) => Math.round(temp) + unitObj.temp;
+  const processPercentage = (percentage) => percentage + "%";
+  const processWind = (wind) => wind + unitObj.wind;
+  const processUV = (uv) => uv.toFixed(1);
 
-  const processTempArray = (arr) => arr.map(processTemp);
   const processWeatherCodeArray = (arr) => arr.map(processWeatherCode);
+  const processTempArray = (arr) => arr.map(processTemp);
 
   return modify(dataObj, {
     lastUpdateTime: processTime,
-    currApparTemp: processTemp,
-    currTemp: processTemp,
-    currWind: processWind,
-    currPrecip: processPercentage,
-    currHumidity: processPercentage,
-    currUV: processUV,
     currDesc: processWeatherCode,
+    currTemp: processTemp,
+    currApparTemp: processTemp,
+    currHumidity: processPercentage,
+    currPrecip: processPercentage,
+    currWind: processWind,
+    currUV: processUV,
     nextDescs: processWeatherCodeArray,
-    nextTempsMax: processTempArray,
-    nextTempsMin: processTempArray,
+    nextTempsHigh: processTempArray,
+    nextTempsLow: processTempArray,
   });
 }

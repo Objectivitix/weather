@@ -75,37 +75,37 @@ export default async function getData(query, imperial) {
 
   const {
     current_weather: {
-      temperature: currTemp,
       time: lastUpdateTime,
-      windspeed: currWind,
       weathercode: currDesc,
+      temperature: currTemp,
+      windspeed: currWind,
     },
     hourly: {
       time: hours,
       [Symbol()]: currIndex = hours.indexOf(lastUpdateTime),
       apparent_temperature: { [currIndex]: currApparTemp },
-      precipitation_probability: { [currIndex]: currPrecip },
       relativehumidity_2m: { [currIndex]: currHumidity },
+      precipitation_probability: { [currIndex]: currPrecip },
       uv_index: { [currIndex]: currUV },
     },
     daily: {
-      temperature_2m_max: [, ...nextTempsMax],
-      temperature_2m_min: [, ...nextTempsMin],
       weathercode: [, ...nextDescs],
+      temperature_2m_max: [, ...nextTempsHigh],
+      temperature_2m_min: [, ...nextTempsLow],
     },
   } = await getWeatherData(latitude, longitude, timezone, imperial);
 
   return {
     lastUpdateTime,
-    currApparTemp,
-    currTemp,
-    currWind,
     currDesc,
-    currPrecip,
+    currTemp,
+    currApparTemp,
     currHumidity,
+    currPrecip,
+    currWind,
     currUV,
     nextDescs,
-    nextTempsMax,
-    nextTempsMin,
+    nextTempsHigh,
+    nextTempsLow,
   };
 }

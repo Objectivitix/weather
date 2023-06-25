@@ -34,8 +34,8 @@ export function render({
   currPrecip,
   currWind,
   currUV,
-  nextTempsMax,
-  nextTempsMin,
+  nextTempsHigh,
+  nextTempsLow,
 }) {
   time.textContent = lastUpdateTime;
   desc.textContent = currDesc;
@@ -46,11 +46,11 @@ export function render({
   wind.textContent = currWind;
   uv.textContent = currUV;
 
-  nextTempsMax.forEach((temp, index) => {
-    highs[index].textContent = temp;
-  })
+  nextTempsHigh.forEach((temperature, index) => {
+    highs[index].textContent = temperature;
+  });
 
-  nextTempsMin.forEach((temp, index) => {
-    lows[index].textContent = temp;
-  })
+  nextTempsLow.forEach((temperature, index) => {
+    lows[index].textContent = temperature;
+  });
 }
