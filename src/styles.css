@@ -80,21 +80,27 @@ body {
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  padding: 15rem 0 7rem;
+  padding: 18rem 0 7rem;
 }
 
 .search {
   position: absolute;
   top: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
   width: min(55vw, 45rem);
-  font-size: var(--fs-600);
 }
 
 .search__control {
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   background: none;
+
   border-bottom: 1px solid gray;
+  font-size: var(--fs-600);
   transition: 300ms;
 }
 

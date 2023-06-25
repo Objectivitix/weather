@@ -1,3 +1,5 @@
-import initialize from "./dom";
+import "./styles.css";
+
+import initialize from "./modules/dom";
 
 initialize();

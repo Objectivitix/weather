@@ -1,6 +1,6 @@
 import { addDays, format } from "date-fns";
 
-import getData from "./data";
+import getData, { LocationError } from "./data";
 import processData from "./process";
 
 const METRIC_TEXT = "°C / kph";
@@ -8,6 +8,8 @@ const IMPERIAL_TEXT = "°F / mph";
 
 const searchControl = document.querySelector(".search__control");
 const searchEnter = document.querySelector(".search__enter");
+const searchError = document.querySelector(".search__error");
+
 const unitToggle = document.querySelector(".unit-toggle");
 
 const location = document.querySelector(".header__location");
@@ -25,7 +27,7 @@ const days = document.querySelectorAll(".forecast__day");
 const highs = document.querySelectorAll(".forecast__high");
 const lows = document.querySelectorAll(".forecast__low");
 
-let prevQuery = "Kanata";
+let currQuery = "Kanata";
 let currImperial = false;
 
 export default function initialize() {
@@ -78,7 +80,7 @@ function displayData({
 function bind() {
   unitToggle.addEventListener("click", async () => {
     currImperial = !currImperial;
-    await run(prevQuery, currImperial);
+    await run(currQuery, currImperial);
 
     if (currImperial) {
       unitToggle.textContent = METRIC_TEXT;
@@ -88,8 +90,20 @@ function bind() {
   });
 
   searchEnter.addEventListener("click", async () => {
-    prevQuery = searchControl.value;
-    await run(prevQuery, currImperial);
+    const tentative = searchControl.value;
+
+    try {
+      await run(tentative, currImperial);
+      currQuery = tentative;
+      searchControl.value = "";
+    } catch (err) {
+      if (err instanceof LocationError) {
+        handleLocationError();
+        return;
+      }
+
+      throw err;
+    }
   });
 }
 
@@ -103,4 +117,16 @@ function displayWeek() {
   week.forEach((day, index) => {
     days[index].textContent = day;
   });
+}
+
+function handleLocationError() {
+  searchError.textContent = "Cannot find this location.";
+
+  searchControl.addEventListener(
+    "input",
+    () => {
+      searchError.textContent = "";
+    },
+    { once: true },
+  );
 }

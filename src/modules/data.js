@@ -1,8 +1,8 @@
-import "./styles.css";
-
 const GEOCODING = "https://geocoding-api.open-meteo.com/v1/search?";
 const WEATHER = "https://api.open-meteo.com/v1/forecast?";
 const LOCATION_CACHE = "locationCache";
+
+export class LocationError extends Error {}
 
 async function getLocationData(query) {
   // Cache is weird... is it making the site faster?
@@ -26,7 +26,7 @@ async function getLocationData(query) {
   const data = await response.json();
 
   if (!("results" in data)) {
-    throw new Error("cannot find location");
+    throw new LocationError("cannot find location");
   }
 
   return data;
@@ -68,8 +68,6 @@ export default async function getData(query, imperial) {
   const {
     results: [{ name: city, country, latitude, longitude, timezone }],
   } = await getLocationData(query);
-
-  console.log(await getLocationData(query));
 
   // [Symbol()] guarantees a non-existent property because
   // data is retrieved from JSON. Hacky, but very cool, so
