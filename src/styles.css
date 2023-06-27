@@ -88,14 +88,16 @@ body {
 .actions {
   display: flex;
   align-items: baseline;
-  gap: 3.5rem;
-  width: min(80vw, 45rem);
+  gap: 3rem;
+  width: min(90vw, 45rem);
 }
 
 .unit-toggle {
   position: absolute;
   right: 5rem;
   top: 5rem;
+
+  flex-shrink: 0;
 
   width: 13rem;
   padding: 1.25rem;
@@ -184,7 +186,7 @@ body {
 }
 
 .basic__appar {
-  margin-top: -2rem;
+  margin-top: -1.75rem;
 }
 
 .more {
@@ -244,5 +246,19 @@ body {
 @media screen and (max-width: 40em) {
   .current {
     font-size: var(--fs-800);
+  }
+
+  .basic__appar {
+    margin-top: -1.25rem;
+  }
+}
+
+@media screen and (max-width: 30em) {
+  .current {
+    font-size: var(--fs-700);
+  }
+
+  .basic__appar {
+    margin-top: -0.5rem;
   }
 }
