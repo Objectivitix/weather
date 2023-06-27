@@ -82,7 +82,7 @@ function displayData({
 function bind() {
   unitToggle.addEventListener("click", async () => {
     currImperial = !currImperial;
-    await run(currQuery, currImperial);
+    run(currQuery, currImperial);
 
     if (currImperial) {
       unitToggle.textContent = METRIC_TEXT;
@@ -103,7 +103,7 @@ async function onEnter() {
   const tentative = searchControl.value;
 
   if (!(tentative && /\S/.test(tentative))) {
-    displayError("Location input cannot be empty.")
+    displayError("Location input cannot be empty.");
     return;
   }
 
@@ -117,7 +117,7 @@ async function onEnter() {
       return;
     }
 
-    throw err;
+    displayError("Sorry! There was an error.");
   }
 }
 

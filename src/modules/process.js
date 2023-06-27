@@ -1,4 +1,4 @@
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 const WEATHERCODE = {
   0: "Clear Sky",
@@ -53,8 +53,7 @@ function modify(dataObj, propsToCallbacks) {
 export default function processData(dataObj, imperial) {
   const unitObj = imperial ? IMPERIAL : METRIC;
 
-  const processTime = (time) =>
-    format(parseISO(time), "EEEE, MMMM d, y 'at' HH:mm");
+  const processDate = (date) => format(date, "EEEE, MMMM d, y 'at' HH:mm");
 
   const processWeatherCode = (code) => WEATHERCODE[code];
   const processTemp = (temp) => Math.round(temp) + unitObj.temp;
@@ -66,7 +65,7 @@ export default function processData(dataObj, imperial) {
   const processTempArray = (arr) => arr.map(processTemp);
 
   return modify(dataObj, {
-    lastUpdateTime: processTime,
+    lastUpdateTime: processDate,
     currDesc: processWeatherCode,
     currTemp: processTemp,
     currApparTemp: processTemp,
